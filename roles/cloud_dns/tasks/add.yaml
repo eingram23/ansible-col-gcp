@@ -19,7 +19,7 @@
 - name: Add DNS record
   google.cloud.gcp_dns_resource_record_set:
     name: "{{ hostname }}.ycdisp.net."
-    managed_zone: "{{ managed_zone }}"
+    managed_zone: "{{ managed_zone['resources'] }}"
     type: "{{ record_type }}"
     ttl: 300
     target:
