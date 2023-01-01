@@ -13,18 +13,21 @@
     service_account_file: "gcp-creds.json"
   register: managed_zone
 
-- name: Add DNS A record
-  google.cloud.gcp_dns_resource_record_set:
-    name: "{{ hostname }}.ycdisp.net."
-    managed_zone: "{{ managed_zone }}"
-    type: "{{ record_type }}"
-    ttl: 300
-    target:
-      - "{{ target }}"
-    project: proj-yc-srv1
-    auth_kind: serviceaccount
-    service_account_file: "gcp-creds.json"
-    state: present
+- ansible.builtin.debug:
+    var: managed_zone
+
+# - name: Add DNS record
+#   google.cloud.gcp_dns_resource_record_set:
+#     name: "{{ hostname }}.ycdisp.net."
+#     managed_zone: "{{ managed_zone }}"
+#     type: "{{ record_type }}"
+#     ttl: 300
+#     target:
+#       - "{{ target }}"
+#     project: proj-yc-srv1
+#     auth_kind: serviceaccount
+#     service_account_file: "gcp-creds.json"
+#     state: present
 
 - name: Remove gcp sa json file
   ansible.builtin.file:
