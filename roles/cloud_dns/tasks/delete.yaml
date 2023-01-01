@@ -1,0 +1,24 @@
+---
+- name: Create gcp sa json file on host
+  ansible.builtin.template:
+    src: gcp-creds.json.j2
+    dest: gcp-creds.json
+    mode: '0600'
+
+- name: Add DNS A record
+  google.cloud.gcp_dns_resource_record_set:
+    name: "{{ hostname }}.ycdisp.net."
+    managed_zone: ycdisp-net-zone
+    type: A
+    ttl: 300
+    target:
+      - "{{ ip_address }}"
+    project: proj-yc-srv1
+    auth_kind: serviceaccount
+    service_account_file: "gcp-creds.json"
+    state: absent
+
+- name: Remove gcp sa json file
+  ansible.builtin.file:
+    path: gcp-creds.json
+    state: absent
