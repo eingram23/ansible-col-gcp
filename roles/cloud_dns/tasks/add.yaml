@@ -3,7 +3,7 @@
   ansible.builtin.template:
     src: gcp-creds.json.j2
     dest: /tmp/gcp-creds.json
-    mode: '0600'
+    mode: '0644'
 
 - name: Add DNS record
   google.cloud.gcp_dns_resource_record_set:
@@ -15,7 +15,7 @@
       - "{{ target }}"
     project: proj-yc-srv1
     auth_kind: serviceaccount
-    service_account_file: "gcp-creds.json"
+    service_account_file: "/tmp/gcp-creds.json"
     state: present
 
 - name: Remove gcp sa json file
