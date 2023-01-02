@@ -2,7 +2,7 @@
 - name: Create gcp sa json file on host
   ansible.builtin.template:
     src: gcp-creds.json.j2
-    dest: gcp-creds.json
+    dest: /tmp/gcp-creds.json
     mode: '0600'
 
 - name: Remove DNS record
@@ -20,5 +20,5 @@
 
 - name: Remove gcp sa json file
   ansible.builtin.file:
-    path: gcp-creds.json
+    path: /tmp/gcp-creds.json
     state: absent
