@@ -1,0 +1,2 @@
+---
+managed_zone: { 'name': 'ycdisp-net-zone', 'dnsName': 'ycdisp.net.' }
